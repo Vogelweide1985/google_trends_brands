@@ -1,4 +1,10 @@
 default:
+  server:
+    dbhost: 192.168.1.38
+    dbport: 5432
+    dbname: "Rapid"
+    dbuser: "postgres"
+    dbpassword: "alpha##23SQL"
   zeitraum_name:
     - d30
     - d90
@@ -10,16 +16,16 @@ default:
     - today 12-m
     - today+5-y
   suchbegriffe:
-    leh:
+    LEH:
       - Aldi Süd
       - Aldi Nord
       - Lidl
       - Netto
       - Norma
-    baumarkt:
+    Baumarkt:
       - obi
       - bauhaus
       - hagebaumarkt
-    touristik1:
+    Touristik_1:
       - kreuzfahrt
       - flussreise

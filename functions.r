@@ -34,7 +34,7 @@ marken.ls
 }
 
 
-get_interest <- function(gtrends_result, interest = "time") {
+get_interest <- function(gtrends_result, interest = "time", branche) {
   # options: time, region, city
   if (interest == "time") {topic <- "interest_over_time"}
   else if (interest == "region") {topic <- "interest_by_region"}
@@ -46,25 +46,23 @@ get_interest <- function(gtrends_result, interest = "time") {
   
   for (m in 1: length(gtrends_result)) {
     for (z in 1: length(gtrends_result[[m]])) {
-      
       if( !exists("df", inherits = F)) {
-        df <- gtrends_result[[1]][[1]][[topic]]
+        df <- gtrends_result[[m]][[z]][[topic]]
         if(is.null(df)) {next} # prüft ob Daten vorhanden
         df[, "timerange"] <- names(gtrends_result[[m]][z])
         df[, "hits"] <- as.integer(gsub("<1", "0", df[, "hits"]))
+        df[, "branche"] <- names(branchen[m])
       }
       else {
-        g <- gtrends_result[[1]][[1]][[topic]]
+        g <- gtrends_result[[m]][[z]][[topic]]
         if(is.null(g)) {next} # prüft ob Daten vorhanden
         g[, "timerange"] <- names(gtrends_result[[m]][z])
         g[, "hits"] <- as.integer(gsub("<1", "0", g[, "hits"]))
-        bind_rows(df, g)
+        g[, "branche"] <- names(branchen[m])
+        df <- bind_rows(df, g)
       }
-      
     }
   }
 df
 }
-
-
 
