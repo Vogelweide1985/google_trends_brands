@@ -19,7 +19,8 @@ get_one_brand <- function(marke, zeitraum) {
 }
 
 
-get_all_brands <- function(marken, zeit_chr, zeit_api) {
+get_all_brands <- function(marken, zeit_chr, zeit_api, branchenvergleich) {
+if (!branchenvergleich) {marken <- unlist(marken)}
 marken.ls  <-list()
   for (m in 1: length(marken)) { 
     for (z in 1: length(zeit_chr)) {
@@ -34,7 +35,7 @@ marken.ls
 }
 
 
-get_interest <- function(gtrends_result, interest = "time", branche) {
+get_interest <- function(gtrends_result, interest = "time", query) {
   # options: time, region, city
   if (interest == "time") {topic <- "interest_over_time"}
   else if (interest == "region") {topic <- "interest_by_region"}

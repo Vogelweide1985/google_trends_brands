@@ -1,0 +1,6 @@
+Features: 
+ - Trending/Related Searches
+ - Mehr Zeiträume oder spezifischere Zeiträume
+ - Cronjob
+ - Aktualisieren der Datenbank
+ - Superset Darstellung
