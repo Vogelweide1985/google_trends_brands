@@ -1,0 +1,22 @@
+default:
+  zeitraum_name:
+    - d30
+    - d90
+    - m12
+    - y05
+  zeitraum_api:
+    - today 1-m
+    - today 3-m
+    - today 12-m
+    - today+5-y
+  category:
+    leh:
+      - Aldi Süd
+      - Aldi Nord
+      - Lidl
+      - Netto
+      - Norma
+    baumarkt:
+      - obi
+      - bauhaus
+      - hagebaumarkt
