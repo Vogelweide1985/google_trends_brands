@@ -19,6 +19,3 @@ df <- get_interest(ls, "city")
 write.csv(df,"hits_by_city.csv", row.names = F)
 
 
-
-names(ls[[2]][[3]][[1]])
-ls[[2]][[2]][[1]]["time"]
