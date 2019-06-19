@@ -44,29 +44,27 @@ get_interest <- function(gtrends_result, interest = "time") {
     return(NA)
   }
   
-  
-  df <- gtrends_result[[1]][[1]][[topic]]
-  if(is.null(df)) {next} # prüft ob Daten vorhanden
-  
-  df[, "timerange"] <- names(gtrends_result[[1]][1])
   for (m in 1: length(gtrends_result)) {
     for (z in 1: length(gtrends_result[[m]])) {
-      g <- gtrends_result[[m]][[z]][[topic]]
-      if(is.null(g)) {next} # prüft ob Daten vorhanden
-      g[, "timerange"] <- names(gtrends_result[[m]][z])
       
-      #Korrektur der Hits-Werte falls GTrens '<1' ausgibt
-      if (is.character(g[, "hits"])) {
+      if( !exists("df", inherits = F)) {
+        df <- gtrends_result[[1]][[1]][[topic]]
+        if(is.null(df)) {next} # prüft ob Daten vorhanden
+        df[, "timerange"] <- names(gtrends_result[[m]][z])
+        df[, "hits"] <- as.integer(gsub("<1", "0", df[, "hits"]))
+      }
+      else {
+        g <- gtrends_result[[1]][[1]][[topic]]
+        if(is.null(g)) {next} # prüft ob Daten vorhanden
+        g[, "timerange"] <- names(gtrends_result[[m]][z])
         g[, "hits"] <- as.integer(gsub("<1", "0", g[, "hits"]))
+        bind_rows(df, g)
       }
       
-      
-      if (!m==1 && !z ==1) {
-        df <- bind_rows(df, g) 
-      }
     }
   }
 df
 }
+
 
 

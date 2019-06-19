@@ -29,9 +29,3 @@ df_time <- get_interest(ls2)
 df_region <- get_interest(ls2, "region")
 df_city <- get_interest(ls2, "city")
 
-
-test <- ls2[[3]][[3]][[1]]
-
-
-test$hits <- gsub("<1", "0", test$hits)
-as.integer(test$hits)
