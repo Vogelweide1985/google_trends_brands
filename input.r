@@ -5,7 +5,7 @@ config <- config::get()
 
 
 # Einlesen aller Individualmarken
-marken   <- unlist(config$category)
+marken   <- unlist(config$branchen)
 #### Ziehen aller Marken über alle zeitraeume
 ls <- get_all_brands(marken, config[["zeitraum_name"]], config[["zeitraum_api"]])
 #Zeitreihen Dataframe über alle marken und zeitraeume,evtl. fuer bessere Datenvararbeitung

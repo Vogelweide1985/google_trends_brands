@@ -9,7 +9,7 @@ default:
     - today 3-m
     - today 12-m
     - today+5-y
-  category:
+  branchen:
     leh:
       - Aldi Süd
       - Aldi Nord
@@ -20,3 +20,7 @@ default:
       - obi
       - bauhaus
       - hagebaumarkt
+  suchbegriffe:
+    touristik1:
+      - kreuzfahrt
+      - flussreise
