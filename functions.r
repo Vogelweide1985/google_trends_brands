@@ -6,7 +6,7 @@ get_one_brand <- function(marke, zeitraum) {
   if (marke == "") {
     return(NA)
   }
-  ls <- gtrends(c(marke), geo = "DE", time = zeitraum)
+  ls <- gtrends(marke, geo = "DE", time = zeitraum)
   if(is.null(ls[[1]][[1]][[1]])) {
     print(paste("Keine Daten für", marke, "für den Zeitraum", zeitraum )) 
     return(NA)
@@ -44,17 +44,21 @@ get_interest <- function(gtrends_result, interest = "time") {
   
   
   df <- gtrends_result[[1]][[1]][[topic]]
+  if(is.null(df)) {next} # prüft ob Daten vorhanden
+  
   df[, "timerange"] <- names(gtrends_result[[1]][1])
   for (m in 1: length(gtrends_result)) {
     for (z in 1: length(gtrends_result[[m]])) {
+      print(paste(m, z))
       g <- gtrends_result[[m]][[z]][[topic]]
+      if(is.null(g)) {next} # prüft ob Daten vorhanden
       g[, "timerange"] <- names(gtrends_result[[m]][z])
-      if (!m==1 && z ==1) {
+      if (!m==1 && !z ==1) {
         df <- bind_rows(df, g) 
       }
     }
   }
-  df
+df
 }
 
 
