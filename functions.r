@@ -48,9 +48,6 @@ get_interest <- function(gtrends_result, interest = "time") {
   for (m in 1: length(gtrends_result)) {
     for (z in 1: length(gtrends_result[[m]])) {
       g <- gtrends_result[[m]][[z]][[topic]]
-      print(m)
-      print(z)
-      print(names(gtrends_result[[m]][z]))
       g[, "timerange"] <- names(gtrends_result[[m]][z])
       if (!m==1 && z ==1) {
         df <- bind_rows(df, g) 
