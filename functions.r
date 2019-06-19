@@ -3,7 +3,8 @@ library(dplyr)
 
 
 get_one_brand <- function(marke, zeitraum) {
-  if (marke == "") {
+  #print(marke)
+  if (any(marke == "")) {
     return(NA)
   }
   ls <- gtrends(marke, geo = "DE", time = zeitraum)
@@ -12,7 +13,7 @@ get_one_brand <- function(marke, zeitraum) {
     return(NA)
   }
   else {
-    print(paste("Lese ein:", marke, ", Zeitraum:", zeitraum))
+    print(paste( marke, " : ", zeitraum))
     ls
   }
 }
@@ -22,10 +23,11 @@ get_all_brands <- function(marken, zeit_chr, zeit_api) {
 marken.ls  <-list()
   for (m in 1: length(marken)) { 
     for (z in 1: length(zeit_chr)) {
-      
-      ls <- get_one_brand(marken[m], zeit_api[z]) # Get Trends Data
+      query <- unlist(marken[m])
+      ls <- get_one_brand(query, zeit_api[z]) # Get Trends Data
       if(is.na(ls)[[1]]) {next}  #Pruefen ob woechentlcihe Daten vorhanden
-      marken.ls[[marken[m]]][[zeit_chr[z]]] <- ls
+      lst.name <- paste0(query,collapse = ",")
+      marken.ls[[lst.name]][[zeit_chr[z]]] <- ls
     }
   }
 marken.ls
@@ -49,7 +51,6 @@ get_interest <- function(gtrends_result, interest = "time") {
   df[, "timerange"] <- names(gtrends_result[[1]][1])
   for (m in 1: length(gtrends_result)) {
     for (z in 1: length(gtrends_result[[m]])) {
-      print(paste(m, z))
       g <- gtrends_result[[m]][[z]][[topic]]
       if(is.null(g)) {next} # prüft ob Daten vorhanden
       g[, "timerange"] <- names(gtrends_result[[m]][z])
